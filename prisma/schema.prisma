@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role String
+
+  @@map("users")
+}
+
+model Participante {
+  id String @id @default(uuid())
+  nome String
+  cpfCnpj String @map("cpf_cnpj")
+  tipo String @default("fisica")
+  tipoContribuinte String @map("tipo_contribuinte")
+  inscricaoEstadual Int @map("inscricao_estadual")
+  inscricaoMunicipal Int @map("inscricao_municipal")
+  situacao String @default("ativo")
+  enderecoId String @map("endereco_id")
+  email String
+  telefone String
+
+  endereco Endereco @relation(fields: [enderecoId], references: [id])
+}
+
+model Endereco {
+  id String @id @default(uuid())
+  rua String
+  numero Int
+  bairro String
+  cidade String 
+  estado String
+  cep String
+
+  participante Participante[]
+}
+
+model Produto {
+  id String @id @default(uuid())
+  codProd Int @unique @map("cod_prod")
+  codBarras Int @unique @map("cod_barras")
+  codNcm Int @map("cod_ncm")
+  descricao String
+  categoria String
+  ativo Boolean
+  tipoProd String @map("tipo_prod")
+  unidadeMedida String @map("unidade_medida")
+  custoMercadoria String @map("custo_mercadoria")
+  precoVenda String @map("preco_venda")
+  estoqueInicial Int @map("estoque_inicial")
+  createdAt DateTime @map("created_at")
+  updatedAt DateTime @map("updated_at")
+  estoque Estoque[]
+
+
+  @@map("produtos")
+}
+
+model Estoque {
+  id String @id @default(uuid())
+  codProd Int
+  descricao String
+  estoqueContabil Int @map("estoque_contabil")
+  estoqueDisponivel Int @map("estoque_disponivel")
+  estoqueAreaVendas Int @map("estoque_area_vendas")
+  createdAt DateTime @map("created_at")
+  updatedAt DateTime @map("updated_at")
+
+  produto Produto @relation(fields: [codProd], references: [codProd])
+  
+}
