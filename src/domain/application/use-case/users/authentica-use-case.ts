@@ -7,7 +7,7 @@ import { compare } from "bcrypt";
 // Esse caso de uso não etá sendo utilizado no momento
 
 interface AuthenticateRequest {
-  email: string
+  username: string
   password: string
 }
 
@@ -22,11 +22,11 @@ export class AuthenticateUseCase {
   ) { }
 
   async execute({
-    email,
+    username,
     password,
   }: AuthenticateRequest): Promise<AuthenticateResponse> {
 
-    const user = await this.userRepository.findByEmail(email)
+    const user = await this.userRepository.findByUserName(username)
     
     if (!user) {
       throw new Error('Usuário não encontrado.')

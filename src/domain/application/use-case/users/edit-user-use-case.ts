@@ -35,7 +35,7 @@ export class EditUserUseCase {
 
     user.password = password
     user.email = email
-    user.email = role
+    user.role = role
 
     await this.userRepository.save(user)
 

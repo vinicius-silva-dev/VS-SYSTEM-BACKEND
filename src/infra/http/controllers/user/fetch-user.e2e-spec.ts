@@ -29,6 +29,7 @@ describe('[GET] Fetch user', () => {
     const user = await prisma.user.create({
       data: {
         name: 'Vinicius Silva Souza',
+        username: 'vinicius.silva',
         email: 'viniciusvss120@gmail.com',
         password: '123456',
         role: 'admin'

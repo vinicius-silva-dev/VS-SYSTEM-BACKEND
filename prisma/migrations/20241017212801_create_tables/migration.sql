@@ -8,7 +8,9 @@ CREATE TABLE "users" (
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
-
+ALTER TABLE "users" ADD COLUMN "user_name" TEXT DEFAULT 'default_user_name';
+ALTER TABLE "users" ALTER COLUMN "user_name" SET NOT NULL;
+ALTER TABLE "users" ALTER COLUMN "user_name" DROP DEFAULT;
 -- CreateTable
 CREATE TABLE "Participante" (
     "id" TEXT NOT NULL,

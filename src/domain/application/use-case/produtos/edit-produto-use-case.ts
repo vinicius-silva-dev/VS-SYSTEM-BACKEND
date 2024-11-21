@@ -2,6 +2,7 @@
 
 import { Produto } from "src/domain/entities/produto-entity";
 import { ProdutoRepository } from "../../repository/product-repository";
+import { Injectable } from "@nestjs/common";
 
 
 interface EditProdutoRequest {
@@ -22,6 +23,7 @@ type EditProdutoResponse = {
   produto: Produto
 }
 
+@Injectable()
 export class EditProdutoUseCase {
   constructor(
     private produtoRepository: ProdutoRepository

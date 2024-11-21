@@ -1,6 +1,6 @@
 import { Vendas } from "src/domain/entities/venda-entity";
-import { EstoqueRepository } from "../../repository/estoque-repository";
 import { VendasRepository } from "../../repository/vendas-repository";
+import { EstoqueAreaVendasRepository } from "../../repository/estoque-area-vendas-repository";
 
 interface TrocaMercadoriaRequest {
   vendaId: string
@@ -14,7 +14,7 @@ type TrocaMercadoriaResponse = {
 
 export class TrocaMercadoriaUseCase {
   constructor(
-    private estoqueRepository: EstoqueRepository,
+    private estoqueAreaVendasRepository: EstoqueAreaVendasRepository,
     private vendasRepository: VendasRepository
   ) {}
 
@@ -29,7 +29,7 @@ export class TrocaMercadoriaUseCase {
       throw new Error('Venda not found!')
     }
 
-    this.entradaEstoque(items)
+    await this.entradaEstoque(items)
     const removeItemToTroca = findVenda.items.filter(item => {
       const itemRemove = items.find(index => item === index)
 
@@ -46,15 +46,15 @@ export class TrocaMercadoriaUseCase {
     findVenda.items.push(...removeItemToTroca) // aqui colocamos os dados do outro array
     // console.log(findVenda.items)
     
+    await this.saidaEstoque(newItems)
     await this.vendasRepository.save(findVenda)
-    this.saidaEstoque(newItems)
 
     return {
       venda: findVenda
     }
   }
 
-  entradaEstoque(items: number[]) {
+  async entradaEstoque(items: number[]) {
     const qtdProd = items.reduce((acc, item) => {
       if(acc[item]){
         acc[item]++
@@ -64,7 +64,7 @@ export class TrocaMercadoriaUseCase {
 
       return acc
     },{})
-    console.log(qtdProd)
+    // console.log(qtdProd)
 
     // aqui é para tirar os codProd repetidos
     for(let i = 0; i <= items.length; i++) {
@@ -77,7 +77,7 @@ export class TrocaMercadoriaUseCase {
     // Aqui estamos buscando os produtos com base nos códigos recebidos da venda
     
     const prod = items.map(async (item) => {
-      const produtosEstoque = await this.estoqueRepository.findByCodProd(item)
+      const produtosEstoque = await this.estoqueAreaVendasRepository.findByCodProd(item)
       return produtosEstoque
     })
 
@@ -85,9 +85,9 @@ export class TrocaMercadoriaUseCase {
       throw new Error('Produto não encontrado!!')
     }
 
-    prod.forEach(async(item) => {
-      const valorEstoqueAreaVendas = (await item).estoque_area_vendas
-      const valorCodProd = (await item).cod_prod
+    await prod.forEach(async(item) => {
+      const valorEstoqueAreaVendas = (await item).quantidade
+      const valorCodProd = (await item).codProd
 
       const qtdProdEstoque = items.reduce((acumulador, index) => {
         if(valorCodProd === index) {
@@ -99,12 +99,13 @@ export class TrocaMercadoriaUseCase {
 
       const areaVendas = await item
       
-      areaVendas.estoque_area_vendas = qtdProdEstoque
-      console.log(areaVendas)
+      areaVendas.quantidade = qtdProdEstoque
+      await this.estoqueAreaVendasRepository.save(areaVendas)
+      // console.log(areaVendas)
     })
   }
 
-  saidaEstoque(items: number[]) {
+  async saidaEstoque(items: number[]) {
     const qtdProd = items.reduce((acc, item) => {
       if(acc[item]){
         acc[item]++
@@ -114,7 +115,7 @@ export class TrocaMercadoriaUseCase {
 
       return acc
     },{})
-    console.log(qtdProd)
+    // console.log(qtdProd)
 
     // aqui é para tirar os codProd repetidos
     for(let i = 0; i <= items.length; i++) {
@@ -127,7 +128,7 @@ export class TrocaMercadoriaUseCase {
     // Aqui estamos buscando os produtos com base nos códigos recebidos da venda
     
     const prod = items.map(async (item) => {
-      const produtosEstoque = await this.estoqueRepository.findByCodProd(item)
+      const produtosEstoque = await this.estoqueAreaVendasRepository.findByCodProd(item)
       return produtosEstoque
     })
 
@@ -135,9 +136,9 @@ export class TrocaMercadoriaUseCase {
       throw new Error('Produto não encontrado!!')
     }
 
-    prod.forEach(async(item) => {
-      const valorEstoqueAreaVendas = (await item).estoque_area_vendas
-      const valorCodProd = (await item).cod_prod
+    await prod.forEach(async(item) => {
+      const valorEstoqueAreaVendas = (await item).quantidade
+      const valorCodProd = (await item).codProd
 
       const qtdProdEstoque = items.reduce((acumulador, index) => {
         if(valorCodProd === index) {
@@ -149,8 +150,9 @@ export class TrocaMercadoriaUseCase {
 
       const areaVendas = await item
 
-      areaVendas.estoque_area_vendas = qtdProdEstoque
-      console.log(areaVendas)
+      areaVendas.quantidade = qtdProdEstoque
+      await this.estoqueAreaVendasRepository.save(areaVendas)
+      // console.log(areaVendas)
     })
   }
 }

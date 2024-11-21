@@ -14,6 +14,7 @@ describe('Delete user', () => {
   it('shoud be abble to delete a user', async () => {
     const user = User.create({
       name: 'Vinicius Silva',
+      username: 'vinicius.silva',
       email: 'vinicius100@live.com',
       password: '123456',
       role: 'admin'

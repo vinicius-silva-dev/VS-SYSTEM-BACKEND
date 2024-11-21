@@ -4,6 +4,7 @@ import { UniqueEntityId } from "core/unique-entity-id";
 export interface UserProps {
   id?: UniqueEntityId
   name: string
+  username: string
   email: string
   password: string
   role: string
@@ -13,6 +14,10 @@ export interface UserProps {
 export class User extends Entity<UserProps> {
   get name() {
     return this.props.name
+  }
+
+  get username() {
+    return this.props.username
   }
 
   get email() {

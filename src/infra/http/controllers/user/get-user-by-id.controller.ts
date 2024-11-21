@@ -6,14 +6,14 @@ import { Controller, Get, HttpCode, Param, UseGuards } from "@nestjs/common";
 // import { AuthGuard } from "@nestjs/passport";
 
 
-@Controller('user/:id')
+@Controller('/user/:id')
 export class GetUserByIdController {
   constructor(private getUserUseCase: GetUserByIdUseCase) {}
 
   @Get()
   @UseGuards(AuthGuard)
   @HttpCode(200)
-  async getUsers(@Param('id') id: string): Promise<User> {
+  async getUsers(@Param('id') id: string,): Promise<User> {
     const users = await this.getUserUseCase.execute({id})
 
     if (!users) {

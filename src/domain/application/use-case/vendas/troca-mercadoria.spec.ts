@@ -1,64 +1,57 @@
-import { InMemoryEstoque } from "test/repository/in-memory-estoque";
+
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryVendas } from "test/repository/in-memory-vendas";
-import { Estoque } from "src/domain/entities/estoque-entity"
+import { EstoqueAreaVendas } from "@/domain/entities/estoque-area-venda-entity";
 import { Vendas } from "src/domain/entities/venda-entity";
 import { TrocaMercadoriaUseCase } from "./troca-mercadoria-use-case";
+import { InMemoryEstoqueAreaVendas } from "test/repository/in-memory-estoque-area-venda";
 
-let inMemoryEstoque: InMemoryEstoque
+let inMemoryEstoqueAreaVendas: InMemoryEstoqueAreaVendas
 let inMemoryVendas: InMemoryVendas
 let sut: TrocaMercadoriaUseCase
 describe('Troca Mercadoria', () => {
   beforeEach(() => {
-    inMemoryEstoque = new InMemoryEstoque()
+    inMemoryEstoqueAreaVendas = new InMemoryEstoqueAreaVendas()
     inMemoryVendas = new InMemoryVendas()
 
-    sut = new TrocaMercadoriaUseCase(inMemoryEstoque, inMemoryVendas)
+    sut = new TrocaMercadoriaUseCase(inMemoryEstoqueAreaVendas, inMemoryVendas)
   })
   it('shoul be abble trocar a mercadoria', async () => {
-    
-    const estoque1 = Estoque.create({
-      cod_prod: 4,
+
+    const estoque1 = EstoqueAreaVendas.create({
+      codProd: 4,
       descricao: 'Arroz Bernardo T1 5KG',
-      estoque_contabil: 30,
-      estoque_disponivel: 20,
-      estoque_area_vendas: 10,
+      quantidade: 10,
       createdAt: new Date()
     })
 
-    await inMemoryEstoque.create(estoque1)
+    await inMemoryEstoqueAreaVendas.create(estoque1)
 
-    const estoque2 = Estoque.create({
-      cod_prod: 1,
+    const estoque2 = EstoqueAreaVendas.create({
+      codProd: 1,
       descricao: 'Macarrão Dallas 1KG',
-      estoque_contabil: 37,
-      estoque_disponivel: 27,
-      estoque_area_vendas: 10,
+      quantidade: 10,
       createdAt: new Date()
     })
 
-    await inMemoryEstoque.create(estoque2)
+    await inMemoryEstoqueAreaVendas.create(estoque2)
 
-    const estoque3 = Estoque.create({
-      cod_prod: 2,
+    const estoque3 = EstoqueAreaVendas.create({
+      codProd: 2,
       descricao: 'Trigo Campesina 2KG',
-      estoque_contabil: 25,
-      estoque_disponivel: 15,
-      estoque_area_vendas: 10,
+      quantidade: 10,
       createdAt: new Date()
     })
-    await inMemoryEstoque.create(estoque3)
+    await inMemoryEstoqueAreaVendas.create(estoque3)
 
-    const estoque4 = Estoque.create({
-      cod_prod: 3,
+    const estoque4 = EstoqueAreaVendas.create({
+      codProd: 3,
       descricao: 'Trigo Campesina 2KG',
-      estoque_contabil: 25,
-      estoque_disponivel: 15,
-      estoque_area_vendas: 10,
+      quantidade: 10,
       createdAt: new Date()
     })
 
-    await inMemoryEstoque.create(estoque4)
+    await inMemoryEstoqueAreaVendas.create(estoque4)
 
     const venda = Vendas.create({
       cod_venda: 1,
@@ -74,18 +67,39 @@ describe('Troca Mercadoria', () => {
     })
 
     await inMemoryVendas.create(venda)
-    
+
     await sut.execute({
       vendaId: venda.id.toString(),
       items: [4],
       newItems: [3]
     })
-    
-    // console.log(inMemoryEstoque.items)
+
+    console.log(inMemoryEstoqueAreaVendas.items)
     expect(inMemoryVendas.items[0]).toEqual(
       expect.objectContaining({
         items: [1, 1, 2, 2, 3],
       })
+    )
+
+    expect(await inMemoryEstoqueAreaVendas.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          codProd: 4,
+          quantidade: 11
+        }),
+        expect.objectContaining({
+          codProd: 1,
+          quantidade: 10
+        }),
+        expect.objectContaining({
+          codProd: 2,
+          quantidade: 10
+        }),
+        expect.objectContaining({
+          codProd: 3,
+          quantidade: 9
+        }),
+      ])
     )
 
   })

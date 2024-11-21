@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { ProdutoRepository } from "../../repository/product-repository";
 
 
@@ -5,7 +6,7 @@ interface DeleteProdutoRequest {
   id: string
 }
 
-
+@Injectable()
 export class DeleteProdutoUseCase {
   constructor(
     private produtoRepository: ProdutoRepository

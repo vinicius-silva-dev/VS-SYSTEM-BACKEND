@@ -1,5 +1,7 @@
+import { Injectable } from "@nestjs/common";
 import { ProdutoRepository } from "../../repository/product-repository";
 
+@Injectable()
 export class FetchProdutosUseCase {
   constructor(private produtoRepository: ProdutoRepository) { }
 

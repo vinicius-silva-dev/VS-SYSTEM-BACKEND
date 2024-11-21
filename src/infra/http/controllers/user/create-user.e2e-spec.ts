@@ -22,6 +22,7 @@ describe('[POST] Create user', () => {
   it('Deve ser possivel criar um usuário', async () => {
     const user = await request(app.getHttpServer()).post('/user').send({
       name: 'Vinicius Silva Souza',
+      username: 'vinicius.silva',
 	    email: 'suporteti_jr@gmail.com',
 	    password: '123456',
 	    role: 'admin'

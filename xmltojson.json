@@ -1,0 +1,117 @@
+{
+  "NFSe": {
+    "infNFSe": {
+      "xLocEmi": "Jaru",
+      "xLocPrestacao": "Jaru",
+      "nNFSe": 14,
+      "cLocIncid": 1100114,
+      "xLocIncid": "Jaru",
+      "xTribNac": "Suporte técnico em informática, inclusive instalação, configuração e manutenção de programas de computação e bancos de dados.",
+      "verAplic": "EmissorWeb_1.3.0.0",
+      "ambGer": 2,
+      "tpEmis": 1,
+      "procEmi": 2,
+      "cStat": 100,
+      "dhProc": "2024-10-10T09:16:53-03:00",
+      "nDFSe": 7593,
+      "emit": {
+        "CNPJ": 51709290000188,
+        "xNome": "51.709.290 VINICIUS SILVA SOUZA",
+        "enderNac": {
+          "xLgr": "FREI CANECA",
+          "nro": 1988,
+          "xBairro": "JARU",
+          "cMun": 1100114,
+          "UF": "RO",
+          "CEP": 76890000
+        },
+        "fone": 69993062435,
+        "email": "viniciusvss120@gmail.com"
+      },
+      "valores": {
+        "vTotalRet": 0,
+        "vLiq": 1960
+      },
+      "DPS": {
+        "infDPS": {
+          "tpAmb": 1,
+          "dhEmi": "2024-10-10T09:16:53-03:00",
+          "verAplic": "EmissorWeb_1.3.0.0",
+          "serie": 900,
+          "nDPS": 14,
+          "dCompet": "2024-09-10",
+          "tpEmit": 1,
+          "cLocEmi": 1100114,
+          "prest": {
+            "CNPJ": 51709290000188,
+            "fone": 69993062435,
+            "email": "viniciusvss120@gmail.com",
+            "regTrib": {
+              "opSimpNac": 2,
+              "regEspTrib": 0
+            }
+          },
+          "toma": {
+            "CNPJ": 5371238000147,
+            "xNome": "SISCOMPANY SERVICOS DE DESENVOLVIMENTO DE SOFTWARE LTDA",
+            "end": {
+              "endNac": {
+                "cMun": 1100023,
+                "CEP": 76870430
+              },
+              "xLgr": "MACEIO",
+              "nro": 2433,
+              "xCpl": "SALA  A",
+              "xBairro": "SETOR 03"
+            }
+          },
+          "serv": {
+            "locPrest": {
+              "cLocPrestacao": 1100114
+            },
+            "cServ": {
+              "cTribNac": 10701,
+              "xDescServ": "Serviço de manutenção de micro-computadores ref: mês de Setembro."
+            }
+          },
+          "valores": {
+            "vServPrest": {
+              "vServ": 1960
+            },
+            "trib": {
+              "tribMun": {
+                "tribISSQN": 1,
+                "tpRetISSQN": 1
+              },
+              "totTrib": {
+                "indTotTrib": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "Signature": {
+      "SignedInfo": {
+        "CanonicalizationMethod": "",
+        "SignatureMethod": "",
+        "Reference": {
+          "Transforms": {
+            "Transform": [
+              "",
+              ""
+            ]
+          },
+          "DigestMethod": "",
+          "DigestValue": "SYWYDWFg5Iff2MIfHHpcP+qtef0="
+        }
+      },
+      "SignatureValue": "D6n/urAapAazga2PtmvJODPvUBJTtmgHMqqlVgzjKGVdbeo2RyHDXJ7Ew0N0+lyA16xkr1E4I/81nIQUhnZWAXYoPjGY+LWwwFj1RZiu4buFCYK77J+vilFqAPim1dqj5LFa2xzzZ/fPkQtuZb0a7AFWEyrnDVctXpHam7zkgnHay2PpPJUZ5+WX0oPAR0Za+maSBPjBkpRHNY9TvX5oRF8rmOxtMjgQgYla/flD+mpACCIYQNV1AVgb92LrDqeGrMuGruZMmH1mIagHU4cEVtszO75TAGb+FPqCl/SzGVtydSCeu30pABvz/v7aJcV0mfupU4x1KDOKlLNkxKTsvg==",
+      "KeyInfo": {
+        "X509Data": {
+          "X509Certificate": "MIIIcDCCBligAwIBAgINAL+C2t3533h3cvRkXDANBgkqhkiG9w0BAQsFADCBjDELMAkGA1UEBhMCQlIxEzARBgNVBAoMCklDUC1CcmFzaWwxNTAzBgNVBAsMLEF1dG9yaWRhZGUgQ2VydGlmaWNhZG9yYSBSYWl6IEJyYXNpbGVpcmEgdjEwMTEwLwYDVQQDDChBdXRvcmlkYWRlIENlcnRpZmljYWRvcmEgZG8gU0VSUFJPIFNTTHYxMB4XDTI0MDQzMDE0MDM1MloXDTI1MDQzMDE0MDM1MlowgcoxCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJERjERMA8GA1UEBwwIQlJBU0lMSUExOTA3BgNVBAoMMFNFUlZJQ08gRkVERVJBTCBERSBQUk9DRVNTQU1FTlRPIERFIERBRE9TIFNFUlBSTzEXMBUGA1UEBRMOMzM2ODMxMTEwMDAxMDcxGDAWBgNVBAMMD3d3dy5uZnNlLmdvdi5icjEYMBYGA1UEDxMPQnVzaW5lc3MgRW50aXR5MRMwEQYLKwYBBAGCNzwCAQMTAkJSMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0AIH/mPRdtQg7XzOyioFy0jdrJ4JMQTGU9g7c+aeymhCEY4eh4Vv17hmgVjImiLRuGSiUFWy90Ju/zQBUFwn8kTELyv5ysCeGFhM35ekn/uQiO6syIsYTFPZgMGylM8q5Ambze0GAp7ifGyl2J2JWVkknGGfDuPx2ke8MkJzxxvEx8AqxJnYCg7+9ufBxuIdHZo/i1YxGbUp1miaHASD6x692WDSu2Bc4MAzU4zn/4diYlpyp9g13woxYdtPcAbfS2qrz9XYSBh45pn+ooEBXNBrfyN0j0O5kheaaBFIfhd/m7m/SozVYWICWR3S/q0SdWBGDdHjDgf1oLBNvjQiBwIDAQABo4IDjzCCA4swHwYDVR0jBBgwFoAUrRZPS/EMvsKKooUY1w1GJZMi480wgYgGA1UdHwSBgDB+MDygOqA4hjZodHRwOi8vcmVwb3NpdG9yaW8uc2VycHJvLmdvdi5ici9sY3IvYWNzZXJwcm9zc2x2MS5jcmwwPqA8oDqGOGh0dHA6Ly9jZXJ0aWZpY2Fkb3MyLnNlcnByby5nb3YuYnIvbGNyL2Fjc2VycHJvc3NsdjEuY3JsMIGHBggrBgEFBQcBAQR7MHkwQgYIKwYBBQUHMAKGNmh0dHA6Ly9yZXBvc2l0b3Jpby5zZXJwcm8uZ292LmJyL2NhZGVpYXMvc2VycHJvc3NsLnA3YjAzBggrBgEFBQcwAYYnaHR0cDovL29jc3Auc2VycHJvLmdvdi5ici9hY3NlcnByb3NzbHYxMD4GA1UdEQQ3MDWCD3d3dy5uZnNlLmdvdi5icoIRc2VmaW4ubmZzZS5nb3YuYnKCD2Fkbi5uZnNlLmdvdi5icjAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMGMGA1UdIARcMFowCAYGZ4EMAQICME4GBmBMAQIBaTBEMEIGCCsGAQUFBwIBFjZodHRwOi8vcmVwb3NpdG9yaW8uc2VycHJvLmdvdi5ici9kb2NzL2RwY3NlcnByb3NzbC5wZGYwggF9BgorBgEEAdZ5AgQCBIIBbQSCAWkBZwB1AE51oydcmhDDOFts1N8/Uusd8OCOG41pwLH6ZLFimjnfAAABjy9R24EAAAQDAEYwRAIgfTqFA1rBCS1coFGPYOO5fw+vpq3NwEb0+/TrlxOYrLMCIETZkhSrGKakgfQ46CnmaN7JV/HbDFAw0qAFEEFZYZEfAHYAzxFW7tUufK/zh1vZaS6b6RpxZ0qwF+ysAdJbd87MOwgAAAGPL1HjIAAABAMARzBFAiBPNfFvqPxtEgDvGilqm1ZXb7kw+XVMslCEsmAcol9SZgIhAKc1LJH0J1CvcUec8BYNeF5LScmhvutVKCRNyCAqsP9NAHYAKOKBOP2DIUXpqdaqdTdtg3eohRKzwH9yQUgh3L3pjGYAAAGPL1HzrQAABAMARzBFAiBZnxxEIAj4vSA23huSRk6BAVT317qcAL/4WO/wtG0MkgIhAJilRqI3WSj0vRYoQUzX43rPMJayveOK/KVvjJ0NR6NHMA0GCSqGSIb3DQEBCwUAA4ICAQDbWXqU81WDSo5ZFZmak5yfdhkSFGRpnwMYWB1D6kIMIBLV9h9ztovhYhRHENZJ/XE9s/4dzyXSe3fPFrgazo5zHulQvV8QL/0zLvqOAFKFZPugXnr7pS++/jR9Vqlt7qA3jN3YY5TizLtGnCgHxNhG7CmLJQ3Y10PEdBLOG8xaifhojT18R3jRI/CQYsRzf5SCxTZp76zA3Py1ifnq4uxVm/LtgJO33bUZ+RgXlCwORP3EnZs1k0Yvz/LaGxWntmMNv+y+7T78wb8NPd4/3bHvGcfh84lje1Fz7OkOyeKUsU8SA3wnYRS/hVrjnv02tU3szPB9oJRj7bMhjLKbdWcplnKQgwA8DPdOFARCUptq1Y2vwqlqRVHqTKDY4TyXjyVzyY090Vyax8Yr/D+Rl2aFfoFxFqGkrr0KlGhN/dFTWKeQ8brJVHDITToprGG7PESpmPT6s8BC7GD10MU4sV74sFaoweXgFE2+Tvqt3oMynlBZpvXjo5bFdA/Tm8oPG7gmZFXtGZnjyeIHuTQR+xflw5WF2SfXLhdD+B04iWWjP9lhT4dyES1RTFyEotUC51mB8b5j42+5xLaSelYbljOmo0rs7KXS+n1ej889etS+QgbHezOduzIAtrNxcHtsoiCuRLyVE0FoNJ1UgQRi3Kkw1goOUtxgixjlAAeONEqafA=="
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { z } from "zod";
 
 const userSchema = z.object({
-  email: z.string(),
+  username: z.string(),
   password: z.string()
 })
 
@@ -19,9 +19,9 @@ export class AuthenticateController {
   @Post()
   @HttpCode(HttpStatus.OK)
   async authenticate(@Body() body: User): Promise<{ access_token: string }> {
-    const { email, password } = body
+    const { username, password } = body
 
-    const token = await this.authenticateUseCase.execute({ email, password })
+    const token = await this.authenticateUseCase.execute({ username, password })
 
     if (!token) {
       throw new Error('Usuário não encontrado.')

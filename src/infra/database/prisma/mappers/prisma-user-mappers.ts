@@ -6,6 +6,7 @@ export class PrismaUserMappers {
   static toDomain(raw: PrismaUser) {
     return User.create({
       name: raw.name,
+      username: raw.username,
       email: raw.email,
       password: raw.password,
       role: raw.role
@@ -16,6 +17,7 @@ export class PrismaUserMappers {
     return {
       id: user.id.toString(),
       name: user.name,
+      username: user.username,
       email: user.email,
       password: user.password,
       role: user.role,

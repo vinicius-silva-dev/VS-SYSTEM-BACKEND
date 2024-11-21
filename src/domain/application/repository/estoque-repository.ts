@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Estoque } from "src/domain/entities/estoque-entity";
+import { Estoque } from "@/domain/entities/estoque-area-venda-entity";
 
 
 @Injectable()

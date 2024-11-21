@@ -1,6 +1,7 @@
 
 import { Produto } from "src/domain/entities/produto-entity";
 import { ProdutoRepository } from "../../repository/product-repository";
+import { Injectable } from "@nestjs/common";
 
 
 interface CreateProdutoRequest {
@@ -14,17 +15,17 @@ interface CreateProdutoRequest {
   unidadeMedida: string
   custoMercadoria: string
   precoVenda: string
-  estoqueInicial: number
+  estoqueInicial?: number
   estoque_minimo?: number | null
   estoque_maximo?: number | null
   createdAt: Date
-  updatedAt?: Date | null
 }
 
 type CreateProdutoResponse = {
   produto: Produto
 }
 
+@Injectable()
 export class CreateProdutoUseCase {
   constructor(
     private produtoRepository: ProdutoRepository
@@ -41,7 +42,6 @@ export class CreateProdutoUseCase {
     unidadeMedida,
     custoMercadoria,
     precoVenda,
-    estoqueInicial,
     createdAt
   }: CreateProdutoRequest): Promise<CreateProdutoResponse> {
 
@@ -56,8 +56,8 @@ export class CreateProdutoUseCase {
       unidade_medida: unidadeMedida,
       custo_mercadoria: custoMercadoria,
       preco_venda: precoVenda,
-      estoque_inicial: estoqueInicial,
-      createdAt
+      createdAt,
+      updatedAt: new Date()
     })
 
     await this.produtoRepository.create(produto)

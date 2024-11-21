@@ -16,6 +16,7 @@ datasource db {
 model User {
   id String @id @default(uuid())
   name String
+  username String @map("user_name")
   email String @unique
   password String
   role String
@@ -66,22 +67,50 @@ model Produto {
   estoqueInicial Int @map("estoque_inicial")
   createdAt DateTime @map("created_at")
   updatedAt DateTime @map("updated_at")
-  estoque Estoque[]
+  estoque EstoqueDisponivel[]
+  estoqueAreaVenda EstoqueAreaVendas[]
 
 
   @@map("produtos")
 }
 
-model Estoque {
+model EstoqueDisponivel {
   id String @id @default(uuid())
   codProd Int
-  descricao String
-  estoqueContabil Int @map("estoque_contabil")
-  estoqueDisponivel Int @map("estoque_disponivel")
-  estoqueAreaVendas Int @map("estoque_area_vendas")
+  quantidade Int
   createdAt DateTime @map("created_at")
   updatedAt DateTime @map("updated_at")
 
-  produto Produto @relation(fields: [codProd], references: [codProd])
-  
+  produto Produto @relation(fields: [codProd], references: [codProd]) 
+}
+
+model EstoqueAreaVendas {
+  id String @id @default(uuid())
+  codProd Int
+  quantidade Int
+  createdAt DateTime @map("created_at")
+  updatedAt DateTime @map("updated_at")
+  produto Produto @relation(fields: [codProd], references:[codProd])
+  @@map("estoque_area_vendas")
+}
+
+model MovimentoEstoque {
+  id String @id @default(uuid())
+  descricao String
+  codProd Int
+  quantidade Int
+  createdAt DateTime @map("created_at")
+  updatedAt DateTime @map("updated_at")
+}
+
+model Venda {
+  id String @id @default(uuid())
+  codVenda Int @unique
+  valorTotal Float @map("valor_total")
+  cartaoCredito Float @map("cartao_credito")
+  cartaoDebito Float
+  dinheiro Float
+  troco Float
+  desconto Float
+  caixaId String @map("caixa_id")
 }

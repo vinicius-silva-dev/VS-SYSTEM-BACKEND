@@ -23,41 +23,33 @@ describe('[PUT] Edit user', () => {
     
   
     await app.init()
+
   });
   it('Deve ser possivel editar um usuário', async () => {
     const user = await prisma.user.create({
       data: {
         name: 'Vinicius Silva Souza',
+        username: 'vinicius.silva',
         email: 'viniciusvss120@gmail.com',
         password: '123456',
-        role: 'admin'
+        role: 'padrao'
       }
     })
 
-
+    // console.log('pass 3 ',user)
     const accessToken = sign({sub: user.id}, process.env.SECRET_KEY)
   
     const editUser = await request(app.getHttpServer())
-    .put(`/user/:${user.id}`)
+    .put(`/user/${user.id}`)
     .set('Authorization', `Bearer ${accessToken}`)
     .send({
       email: 'viniciusvss120@gmail.com',
-      password: '654321'
+      password: '654321',
+      role: 'padrao'
     })
     
-    // console.log(editUser.body)
-    // const findUser = await prisma.user.findFirst({ where:{email: 'viniciusvss120@gmail.com',} })
-    // console.log('pass',findUser)
     expect(editUser.statusCode).toEqual(201)
 
-
-    // expect(listUser.body).toEqual(
-    //   expect.arrayContaining([
-    //     expect.objectContaining({
-    //       email: 'viniciusvss120@gmail.com',
-    //     })
-    //   ])
-    // )
 
   })
 })

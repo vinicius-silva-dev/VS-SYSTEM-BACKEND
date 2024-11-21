@@ -57,8 +57,23 @@ export class PrismaUserRepository implements UserRepository {
     return PrismaUserMappers.toDomain(user)
   }
 
+  async findByUserName(userName: string): Promise<User | null> {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        username: userName
+      }
+    })
+
+    if (!user) {
+      return null
+    }
+
+    return PrismaUserMappers.toDomain(user)
+  }
+
   async create(user: User): Promise<void> {
     const data = await PrismaUserMappers.toPrisma(user)
+  
     const createUser = await this.prisma.user.create({
       data
     })

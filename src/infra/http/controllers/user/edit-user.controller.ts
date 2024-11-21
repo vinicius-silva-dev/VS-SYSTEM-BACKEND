@@ -25,7 +25,7 @@ export class EditUserController {
     @Body() body: User
   ) {
     const { email, password, role} = body
-
+  
     const result = await this.editUserUseCase.execute({
       id,
       email,

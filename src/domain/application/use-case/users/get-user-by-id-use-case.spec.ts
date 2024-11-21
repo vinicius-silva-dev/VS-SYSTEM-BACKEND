@@ -14,6 +14,7 @@ describe('Fech user', () => {
   it('shoud be abble to fech a user', async () => {
     const user1 = User.create({
       name: 'Vinicius Silva',
+      username: 'vinicius.silva',
       email: 'vinicius100@live.com',
       password: '123456',
       role: 'admin'
@@ -23,6 +24,7 @@ describe('Fech user', () => {
 
     const user2 = User.create({
       name: 'Maria Silva',
+      username: 'maria.silva',
       email: 'mari100@live.com',
       password: '123456',
       role: 'admin'

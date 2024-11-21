@@ -13,6 +13,7 @@ describe('Create user', () => {
   it('shoud be abble to create a user', async () => {
     await sut.execute({
       name: 'Vinicius Silva',
+      username: 'vinicius.silva',
       email: 'vinicius100@live.com',
       password: '123456',
       role: 'admin'

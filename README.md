@@ -89,6 +89,7 @@ Nest is [MIT licensed](LICENSE).
 - [x] Deve ser possível definir a unidade de medida dos produtos;
 - [x] Deve ser possível colocar o NCM dos produtos;
 - [] Deve ser possível colocar o ICMS dos produtos;
+- [] Deve ser possível dar entrada no estoque;
 
 <!-- Vendas -->
 - [] No sistema de PDV deve ser possível buscar o produto de duas formas, pela descrição e pelo código;
@@ -102,7 +103,7 @@ Nest is [MIT licensed](LICENSE).
 - [] Para fazer qualquer operação no sistema o usuário precisa estar logado;
 
 <!-- Usuarios -->
-- [] Não pode ter usuários repetidos;
+- [x] Não pode ter usuários repetidos;
 - [] Somente o Usuário ADM pode gerenciar as permissões para os usuários;
 - [] O usuários pode acessar os módulos na qual o perfil do mesmo tenha as permissões correspondentes ao módulo;
 
@@ -112,14 +113,38 @@ Nest is [MIT licensed](LICENSE).
 - [] Somente o Admin pode reabrir o caixa em dias anteriores;
 
 <!-- Produtos -->
-- [] 
+- [x] Ao dar entrada no estoque, se o produto não existir no sistema ou código/descrição for diferente da nota, o sistema precisa ter uma ou mais funcionalidades para fazer essa conciliação;
+
+<!-- Estoque -->
+- [x] O sistema terá dois tipos de estoque, o disponível e o area de vendas;
+- [x] Qualquer entrada de produtos será direcionado ao estoque disponível;
+- [] Quando a venda for finalizada e emitido a nota fiscal ou quando houver troca de mercadoria e devoluções, o estoque da area de vendas deve ser movimentado;
+
 
 <!-- O requisitos não-funcionais envolve mais a parte técnica da aplicação, como , qual Banco de dados usar, quais tecnologias usar, quais métodos ou mediadas utilizar. -->
 ## RNFs (Requisitos não-funcionais)
 
-- [] A senha dos usuarios precisa estar criptografada;
-- [] Os dados da aplicação precisam estar persistidos em um banco PostgresSQL;
-- [] O usuário deve ser identificado por um JWT (Json Web TOken);
-- [] A aplicação será desemvolvida com o Nest.js;
+- [x] A senha dos usuarios precisa estar criptografada;
+- [x] Os dados da aplicação precisam estar persistidos em um banco PostgresSQL;
+- [x] O usuário deve ser identificado por um JWT (Json Web TOken);
+- [x] A aplicação será desenvolvida com o Nest.js;
 
+## Banco de dados
+# Tabelas
+- [] User;
+- [] Participantes;
+- [] Enderecos
+
+<!-- Produtos/Estoque -->
+- [] Produto;
+- [] Categorias;
+- [-] Estoque;
+- [] Estoque_Disponível;
+- [] Estoque_Area_Vendas;
+- [] Movimento_Estoque;
+
+<!-- Vendas/Financeiro -->
+- [] Vendas;
+- [] Caixa;
+- [] Cond_Pagamento
 

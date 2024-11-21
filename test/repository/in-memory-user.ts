@@ -30,6 +30,16 @@ export class InMemoryUser implements UserRepository {
     return result
   }
 
+  async findByUserName(username: string): Promise<User | null> {
+    const result = await this.items.find(item => item.username === username)
+
+    if (!result) {
+      return null
+    }
+
+    return result
+  }
+
   
   async create(user: User): Promise<void> {
     await this.items.push(user)

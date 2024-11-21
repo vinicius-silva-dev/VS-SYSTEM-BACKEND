@@ -5,6 +5,7 @@ import { z } from "zod";
 
 const userSchema = z.object({
   name: z.string(),
+  username: z.string(),
   email: z.string(),
   password: z.string(),
   role: z.enum(['admin', 'padrao']).default("padrao")
@@ -19,10 +20,11 @@ export class CreateUserController {
   @Post()
   @HttpCode(201)
   async createUser(@Body() body: User) {
-    const {name, email, password, role} = body
+    const {name, username, email, password, role} = body
 
     const result = await this.createUserUseCase.execute({
       name,
+      username,
       email,
       password: await hash(password, 8),
       role

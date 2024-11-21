@@ -16,6 +16,14 @@ import { DeleteUserController } from "./controllers/user/delete-user.controller"
 import { DeleteUserUseCase } from "@/domain/application/use-case/users/delete-user-use-case";
 import { GetUserByIdController } from "./controllers/user/get-user-by-id.controller";
 import { GetUserByIdUseCase } from "@/domain/application/use-case/users/get-user-by-id-use-case";
+import { CreateProdutoController } from "./controllers/produtos/create-produto.controller";
+import { CreateProdutoUseCase } from "@/domain/application/use-case/produtos/create-produtos-use-case";
+import { EditProdutoUseCase } from "@/domain/application/use-case/produtos/edit-produto-use-case";
+import { EditProdutoController } from "./controllers/produtos/edit-produto.controller";
+import { FetchProdutoController } from "./controllers/produtos/fetch-produtos.controller";
+import { FetchProdutosUseCase } from "@/domain/application/use-case/produtos/fetch-produtos-use-case";
+import { DeleteProdutoUseCase } from "@/domain/application/use-case/produtos/delete-produto-use-case";
+import { DeleteProdutoController } from "./controllers/produtos/delete-produto.controller";
 
 // import { JwtService } from "@nestjs/jwt";
 // import { AuthGuard } from "../auth/auth.guard";
@@ -28,7 +36,12 @@ import { GetUserByIdUseCase } from "@/domain/application/use-case/users/get-user
     EditUserController,
     FetchUserController,
     GetUserByIdController,
-    DeleteUserController
+    DeleteUserController,
+
+    CreateProdutoController,
+    EditProdutoController,
+    FetchProdutoController,
+    DeleteProdutoController
   ],
   providers: [
     AuthenticateUseCase,
@@ -36,7 +49,12 @@ import { GetUserByIdUseCase } from "@/domain/application/use-case/users/get-user
     EditUserUseCase,
     FechUsersUseCase,
     GetUserByIdUseCase,
-    DeleteUserUseCase
+    DeleteUserUseCase,
+
+    CreateProdutoUseCase,
+    EditProdutoUseCase,
+    FetchProdutosUseCase,
+    DeleteProdutoUseCase
   ],
 })
 export class HttpModule { }

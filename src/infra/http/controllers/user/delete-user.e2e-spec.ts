@@ -28,6 +28,7 @@ describe('[DELETE] Delete user', () => {
     const user = await prisma.user.create({
       data: {
         name: 'Vinicius Silva Souza',
+        username: 'vinicius.silva',
         email: 'viniciusvss120@gmail.com',
         password: '123456',
         role: 'admin'
@@ -38,13 +39,11 @@ describe('[DELETE] Delete user', () => {
     const accessToken = sign({sub: user.id}, process.env.SECRET_KEY)
   
     const editUser = await request(app.getHttpServer())
-    .delete(`/user/:${user.id}`)
+    .delete(`/user/${user.id}`)
     .set('Authorization', `Bearer ${accessToken}`)
     .send()
     
-    // console.log(editUser.body)
-    // const findUser = await prisma.user.findFirst({ where:{id: user.id} })
-    // console.log('pass',findUser)
+ 
     expect(editUser.statusCode).toEqual(204)
 
     expect(

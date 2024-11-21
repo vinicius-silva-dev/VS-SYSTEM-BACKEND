@@ -1,6 +1,6 @@
 import { Vendas } from "src/domain/entities/venda-entity";
 import { VendasRepository } from "../../repository/vendas-repository";
-import { EstoqueRepository } from "../../repository/estoque-repository";
+import { EstoqueAreaVendasRepository } from "../../repository/estoque-area-vendas-repository";
 // import { Estoque } from "src/domain/entities/estoque-entity";
 
 interface VendaRequest {
@@ -21,7 +21,7 @@ type VendaResponse = {
 
 export class CreateVendaUseCase {
   constructor(
-    private estoqueRepository: EstoqueRepository,
+    private estoqueAreaVendasRepository: EstoqueAreaVendasRepository,
     private vendasRepository: VendasRepository
   ) {}
 
@@ -37,7 +37,7 @@ export class CreateVendaUseCase {
     desconto
     
   }: VendaRequest): Promise<VendaResponse> {
-    // aqui estamos quantificado cada produto dentro desse array
+    // aqui estamos quantificando cada produto dentro desse array
     const qtdProd = items.reduce((acc, item) => {
       if(acc[item]){
         acc[item]++
@@ -59,7 +59,7 @@ export class CreateVendaUseCase {
     // Aqui estamos buscando os produtos com base nos códigos recebidos da venda
     
     const prod = items.map(async (item) => {
-      const produtosEstoque = await this.estoqueRepository.findByCodProd(item)
+      const produtosEstoque = await this.estoqueAreaVendasRepository.findByCodProd(item)
       return produtosEstoque
     })
 
@@ -67,9 +67,11 @@ export class CreateVendaUseCase {
       throw new Error('Produto não encontrado!!')
     }
 
-    prod.forEach(async(item) => {
-      const valorEstoqueAreaVendas = (await item).estoque_area_vendas
-      const valorCodProd = (await item).cod_prod
+    // Esse caso de uso não estava passando no test, os produtos criados no estoqueAreaVendas foram criados e quando a vendo é finalizada, o estoqueAreaVendas não é movimentado. Isso acontece porque, no test, estavamos esperando uma quantidade de produtos que ainda não aconteceu. Para resolver, colocamos um await no prod.forEach e, também no expect(inMemoryEstoAreaVendas).
+    await prod.forEach(async(item) => {
+      // console.log(await item, qtdProd)
+      const valorEstoqueAreaVendas = (await item).quantidade
+      const valorCodProd = (await item).codProd
 
       const qtdProdEstoque = items.reduce((acumulador, index) => {
         if(valorCodProd === index) {
@@ -81,8 +83,13 @@ export class CreateVendaUseCase {
 
       const areaVendas = await item
 
-      areaVendas.estoque_area_vendas = qtdProdEstoque
+      areaVendas.quantidade = qtdProdEstoque
+      await this.estoqueAreaVendasRepository.save(areaVendas)
+      // console.log('2°',areaVendas)
     })
+    // const estoqueAtualizando = await this.estoqueAreaVendasRepository.findAll()
+    
+
 
     const venda = Vendas.create({
       cod_venda: codVenda,
@@ -96,7 +103,7 @@ export class CreateVendaUseCase {
       valor_total: valorTotal,
       createdAt: new Date()
     })
-    
+
     await this.vendasRepository.create(venda)
     return {
       venda
