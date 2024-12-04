@@ -13,7 +13,7 @@ export interface ProdutoProps {
   unidade_medida: string
   custo_mercadoria: string
   preco_venda: string
-  estoque_inicial?: number
+  estoque_inicial: number
   estoque_minimo?: number | null
   estoque_maximo?: number | null
   createdAt?: Date

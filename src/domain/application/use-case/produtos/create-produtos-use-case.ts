@@ -15,7 +15,7 @@ interface CreateProdutoRequest {
   unidadeMedida: string
   custoMercadoria: string
   precoVenda: string
-  estoqueInicial?: number
+  estoqueInicial: number
   estoque_minimo?: number | null
   estoque_maximo?: number | null
   createdAt: Date
@@ -42,6 +42,7 @@ export class CreateProdutoUseCase {
     unidadeMedida,
     custoMercadoria,
     precoVenda,
+    estoqueInicial,
     createdAt
   }: CreateProdutoRequest): Promise<CreateProdutoResponse> {
 
@@ -56,6 +57,7 @@ export class CreateProdutoUseCase {
       unidade_medida: unidadeMedida,
       custo_mercadoria: custoMercadoria,
       preco_venda: precoVenda,
+      estoque_inicial: estoqueInicial,
       createdAt,
       updatedAt: new Date()
     })

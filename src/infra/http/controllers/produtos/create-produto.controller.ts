@@ -41,7 +41,7 @@ export class CreateProdutoController {
       unidadeMedida,
       custoMercadoria,
       precoVenda,
-      estoqueInicial,
+      estoqueInicial
     } = body
 
     const result = await this.createProdutoUseCase.execute({
@@ -54,8 +54,8 @@ export class CreateProdutoController {
       tipoProduto,
       unidadeMedida,
       custoMercadoria,
-      precoVenda,
       estoqueInicial,
+      precoVenda,
       createdAt: new Date()
     })
 
